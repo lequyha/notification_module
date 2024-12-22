@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**_model.dart
+        options:
+          explicit_to_json: true
+          include_if_null: false
+      freezed|freezed:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**_model.dart
+      retrofit_generator:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**_service.dart

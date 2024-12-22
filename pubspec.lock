@@ -177,9 +177,11 @@ packages:
   core_module:
     dependency: "direct main"
     description:
-      path: "../core_module"
-      relative: true
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "49d7e106f266d92818eea9e668773b0271c8bd94"
+      url: "https://github.com/lequyha/core_module.git"
+    source: git
     version: "1.1.0+1"
   crypto:
     dependency: transitive

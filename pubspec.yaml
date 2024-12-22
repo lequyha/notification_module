@@ -31,7 +31,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   core_module:
-    path: ../core_module
+    git:
+      url: https://github.com/lequyha/core_module.git
+      ref: main
   dio: ^5.7.0
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0

@@ -33,6 +33,7 @@ dependencies:
   core_module:
     git:
       url: https://github.com/lequyha/core_module.git
+      ref: main
   dio: ^5.7.0
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0

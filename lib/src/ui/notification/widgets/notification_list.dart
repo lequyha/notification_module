@@ -54,6 +54,7 @@ class _NotificationListSuccessState extends State<NotificationList> {
           child: Skeletonizer(
             enabled: state.isInitial,
             child: ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) {
                 return index >= state.notifications.length

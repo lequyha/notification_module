@@ -64,14 +64,20 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: NotificationStatus.initial));
+      emit(state.copyWith(
+        status: NotificationStatus.initial,
+        notifications: List.filled(
+          _notificationLimit,
+          NotificationModel.fakeData,
+        ),
+      ));
       final notifications =
           await _notificationRepository.getAllNotifications(page: 0);
       emit(
         state.copyWith(
           status: NotificationStatus.success,
           notifications: notifications,
-          hasReachedMax: notifications.isEmpty,
+          hasReachedMax: notifications.length < _notificationLimit,
         ),
       );
     } catch (error, stackTrace) {

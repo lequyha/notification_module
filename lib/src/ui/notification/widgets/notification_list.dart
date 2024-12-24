@@ -9,10 +9,10 @@ class NotificationList extends StatefulWidget {
   const NotificationList({super.key});
 
   @override
-  State<NotificationList> createState() => _NotificationListSuccessState();
+  State<NotificationList> createState() => _NotificationListState();
 }
 
-class _NotificationListSuccessState extends State<NotificationList> {
+class _NotificationListState extends State<NotificationList> {
   final _scrollController = ScrollController();
 
   @override

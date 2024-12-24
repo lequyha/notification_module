@@ -5,11 +5,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notification_module/src/ui/notification/bloc/notification_bloc.dart';
 import 'package:notification_module/src/ui/notification/widgets/notification_list.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider(
       create: (context) =>
           getIt<NotificationBloc>()..add(const NotificationsFetched()),

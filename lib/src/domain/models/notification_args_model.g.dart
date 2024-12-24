@@ -20,10 +20,10 @@ _$NotificationArgsModelImpl _$$NotificationArgsModelImplFromJson(
 Map<String, dynamic> _$$NotificationArgsModelImplToJson(
         _$NotificationArgsModelImpl instance) =>
     <String, dynamic>{
-      'ticketTitle': instance.ticketTitle,
-      'phaseId': instance.phaseId,
-      'approvalId': instance.approvalId,
-      'phaseOutputId': instance.phaseOutputId,
-      'relationshipId': instance.relationshipId,
-      'ticketId': instance.ticketId,
+      if (instance.ticketTitle case final value?) 'ticketTitle': value,
+      if (instance.phaseId case final value?) 'phaseId': value,
+      if (instance.approvalId case final value?) 'approvalId': value,
+      if (instance.phaseOutputId case final value?) 'phaseOutputId': value,
+      if (instance.relationshipId case final value?) 'relationshipId': value,
+      if (instance.ticketId case final value?) 'ticketId': value,
     };

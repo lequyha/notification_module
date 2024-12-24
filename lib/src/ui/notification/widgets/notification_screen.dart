@@ -3,8 +3,7 @@ import 'package:core_module/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notification_module/src/ui/notification/bloc/notification_bloc.dart';
-import 'package:notification_module/src/ui/notification/widgets/notification_list_loading.dart';
-import 'package:notification_module/src/ui/notification/widgets/notification_list_success.dart';
+import 'package:notification_module/src/ui/notification/widgets/notification_list.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -59,10 +58,8 @@ class NotificationScreen extends StatelessWidget {
                       case NotificationStatus.error:
                         return const Center(
                             child: Text('failed to fetch posts'));
-                      case NotificationStatus.success:
-                        return const NotificationListSuccess();
-                      case NotificationStatus.initial:
-                        return const NotificationListLoading();
+                      default:
+                        return const NotificationList();
                     }
                   },
                 ),

@@ -22,9 +22,9 @@ _$NotificationModelImpl _$$NotificationModelImplFromJson(
 Map<String, dynamic> _$$NotificationModelImplToJson(
         _$NotificationModelImpl instance) =>
     <String, dynamic>{
-      'args': instance.args,
-      'message': instance.message,
-      'recordedTime': instance.recordedTime,
-      'unread': instance.unread,
+      if (instance.args?.toJson() case final value?) 'args': value,
+      if (instance.message case final value?) 'message': value,
+      if (instance.recordedTime case final value?) 'recordedTime': value,
+      if (instance.unread case final value?) 'unread': value,
       'notificationID': instance.notificationId,
     };

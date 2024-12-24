@@ -1,6 +1,7 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:notification_module/src/domain/models/notification_model.dart';
 import 'package:notification_module/src/domain/remote/notification_repository.dart';
 import 'package:stream_transform/stream_transform.dart';
@@ -17,13 +18,14 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
   };
 }
 
+@injectable
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final NotificationRepository _notificationRepository;
 
   NotificationBloc({
     required NotificationRepository notificationRepository,
   })  : _notificationRepository = notificationRepository,
-        super(const NotificationState()) {
+        super(NotificationState()) {
     on<NotificationsFetched>(
       _onNotificationsFetched,
       transformer: throttleDroppable(throttleDuration),
@@ -39,11 +41,15 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     if (state.hasReachedMax) return;
     try {
       final notifications = await _notificationRepository.getAllNotifications(
-          page: state.notifications.length ~/ _notificationLimit);
+          page: state.isInitial
+              ? 0
+              : state.notifications.length ~/ _notificationLimit);
       emit(
         state.copyWith(
           status: NotificationStatus.success,
-          notifications: [...state.notifications, ...notifications],
+          notifications: state.isInitial
+              ? notifications
+              : [...state.notifications, ...notifications],
           hasReachedMax: notifications.length < _notificationLimit,
         ),
       );

@@ -7,11 +7,15 @@ class NotificationState extends Equatable {
   final List<NotificationModel> notifications;
   final bool hasReachedMax;
 
-  const NotificationState({
+  NotificationState({
     this.status = NotificationStatus.initial,
-    this.notifications = const <NotificationModel>[],
+    List<NotificationModel>? notifications,
     this.hasReachedMax = false,
-  });
+  }) : notifications = notifications ??
+            List.filled(
+              _notificationLimit,
+              NotificationModel.fakeData,
+            );
 
   NotificationState copyWith({
     NotificationStatus? status,

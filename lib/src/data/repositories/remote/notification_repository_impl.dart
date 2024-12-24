@@ -1,8 +1,10 @@
 import 'package:core_module/core_module.dart';
+import 'package:injectable/injectable.dart';
 import 'package:notification_module/src/data/service/notification_service.dart';
 import 'package:notification_module/src/domain/models/notification_model.dart';
 import 'package:notification_module/src/domain/remote/notification_repository.dart';
 
+@LazySingleton(as: NotificationRepository)
 class NotificationRepositoryImpl extends BaseApiRepository
     implements NotificationRepository {
   final NotificationService _notificationService;

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notification_module/src/ui/notification/bloc/notification_bloc.dart';
 import 'package:notification_module/src/ui/notification/widgets/notification_option.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class NotificationListSuccess extends StatefulWidget {
-  const NotificationListSuccess({super.key});
+class NotificationList extends StatefulWidget {
+  const NotificationList({super.key});
 
   @override
-  State<NotificationListSuccess> createState() =>
-      _NotificationListSuccessState();
+  State<NotificationList> createState() => _NotificationListSuccessState();
 }
 
-class _NotificationListSuccessState extends State<NotificationListSuccess> {
+class _NotificationListSuccessState extends State<NotificationList> {
   final _scrollController = ScrollController();
 
   @override
@@ -43,9 +43,6 @@ class _NotificationListSuccessState extends State<NotificationListSuccess> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotificationBloc, NotificationState>(
-      buildWhen: (previous, current) =>
-          previous.notifications.length != current.notifications.length ||
-          previous.hasReachedMax != current.hasReachedMax,
       builder: (context, state) {
         if (state.notifications.isEmpty) {
           return const Center(child: Text('no posts'));
@@ -54,23 +51,27 @@ class _NotificationListSuccessState extends State<NotificationListSuccess> {
           onRefresh: () async => context
               .read<NotificationBloc>()
               .add(const NotificationsRefreshed()),
-          child: ListView.separated(
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return index >= state.notifications.length
-                  ? const BottomLoader()
-                  : NotificationOption(
-                      notificationId: state.notifications[index].notificationId,
-                    );
-            },
-            itemCount: state.hasReachedMax
-                ? state.notifications.length
-                : state.notifications.length + 1,
-            controller: _scrollController,
-            separatorBuilder: (_, __) => const Divider(
-              height: 1.0,
-              color: AppColors.kBorderLineColor,
-              thickness: 1.0,
+          child: Skeletonizer(
+            enabled: state.isInitial,
+            child: ListView.separated(
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                return index >= state.notifications.length
+                    ? const BottomLoader()
+                    : NotificationOption(
+                        notificationId:
+                            state.notifications[index].notificationId,
+                      );
+              },
+              itemCount: state.hasReachedMax
+                  ? state.notifications.length
+                  : state.notifications.length + 1,
+              controller: _scrollController,
+              separatorBuilder: (_, __) => const Divider(
+                height: 1.0,
+                color: AppColors.kBorderLineColor,
+                thickness: 1.0,
+              ),
             ),
           ),
         );

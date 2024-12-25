@@ -57,10 +57,11 @@ class _NotificationScreenState extends State<NotificationScreen>
               top: kToolbarHeight,
               child: Container(
                 clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:
-                      BorderRadius.circular(AppBorderRadius.kLargeBorderRadius),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(AppBorderRadius.kLargeBorderRadius),
+                  ),
                 ),
                 child: BlocBuilder<NotificationBloc, NotificationState>(
                   builder: (context, state) {
